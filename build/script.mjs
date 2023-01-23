@@ -1,5 +1,5 @@
 import { WORDS } from "./words.mjs";
-
+import { pool } from "../database/index.mjs";
 const NUMBER_OF_GUESSES = 6;
 let guessesRemaining = NUMBER_OF_GUESSES;
 let currentGuess = [];
@@ -234,3 +234,6 @@ const animateCSS = (element, animation, prefix = "animate__") =>
 
     node.addEventListener("animationend", handleAnimationEnd, { once: true });
   });
+
+console.log(pool);
+console.log(words);
