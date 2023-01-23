@@ -1,4 +1,4 @@
-WORDS = [
+export const WORDS = [
   "which",
   "there",
   "their",
@@ -5757,7 +5757,3 @@ WORDS = [
   "biffy",
   "pupal",
 ];
-
-sample = [1, 2];
-
-module.exports = { WORDS, sample };

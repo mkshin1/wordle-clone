@@ -1,6 +1,10 @@
-const { Client, Pool } = require("pg");
-// const client = new Client();
-const { WORDS, sample } = require("./words.js");
+// const { Client, Pool } = require("pg");
+// // const client = new Client();
+// const { WORDS } = require("./words.mjs");
+import { WORDS } from "./words.mjs";
+// import { Client, Pool } from "pg";
+import pg from "../pg";
+const { Pool, Client } = pg;
 
 // const connectDB = async () => {
 //   await client.connect();
@@ -22,7 +26,7 @@ const client = new Client({
 
 client.connect();
 
-const pool = new Pool({
+export const pool = new Pool({
   host: "localhost",
   user: "michaelshin",
   port: 5432,
@@ -33,7 +37,7 @@ const pool = new Pool({
   connectionTimeoutMillis: 2000,
 });
 
-const insertData = async () => {
+export const insertData = async () => {
   const query = "INSERT INTO words(word) VALUES ($1)";
   const values = [];
   //   await client.query(query, values);
@@ -45,7 +49,6 @@ const insertData = async () => {
     values.shift();
   }
 };
-
 insertData();
 console.log(client.database, "***");
 
