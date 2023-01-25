@@ -1,7 +1,7 @@
 # Wordle Clone
 
-- This application covers game logic only.
-- Front-end dev small app
+- Includes logic only.
+- Full stack small application
 
 ## Steps for building Wordle Clone
 
@@ -14,13 +14,14 @@
 ### Packages (libraries)
 
 - Toastr
+- BootStrap / TailWind CSS
+-
 
 ##### Technologies
 
 - NodeJS
-- HTML
-- CSS
-- Javascript
+- ExpressJS
+- PSQL
 
 #### Ref
 
