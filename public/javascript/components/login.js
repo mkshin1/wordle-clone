@@ -19,14 +19,16 @@ const login = () => {
   // Create the form element
   let form = document.createElement("form");
   form.className = "d-flex flex-column";
+  form.id = "login-form";
+  form.method = "post";
 
   // Create the text input element
-  let input = document.createElement("input");
-  input.type = "text";
-  input.name = "username";
-  input.id = "username";
-  input.className = "form-control-lg";
-  input.placeholder = "Enter your username";
+  let userName = document.createElement("input");
+  userName.type = "text";
+  userName.name = "username";
+  userName.id = "username";
+  userName.className = "form-control-lg";
+  userName.placeholder = "Enter your username";
 
   let password = document.createElement("input");
   password.type = "password";
@@ -36,7 +38,7 @@ const login = () => {
   password.placeholder = "Enter your password";
 
   // Append the text input to the form
-  form.appendChild(input);
+  form.appendChild(userName);
   form.appendChild(password);
 
   // Create the submit button element
@@ -47,7 +49,7 @@ const login = () => {
 
   // a href link to register account
   let registerLink = document.createElement("a");
-  registerLink.href = "/register";
+  registerLink.href = "#";
   registerLink.innerHTML = "Register here";
 
   // Append the submit button to the form
@@ -56,6 +58,26 @@ const login = () => {
 
   // Add the form to the document
   login.appendChild(form);
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user: userName.value, pw: password.value }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data, "*********");
+        // check the user credential from db
+        if (data.login == "successful!") {
+        }
+      })
+      .then((error) => console.log(error));
+  });
 };
 
 export { login, isWorking };
