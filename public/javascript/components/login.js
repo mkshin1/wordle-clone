@@ -62,7 +62,7 @@ const login = () => {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    fetch("/login", {
+    fetch("/users/login/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -70,12 +70,7 @@ const login = () => {
       body: JSON.stringify({ user: userName.value, pw: password.value }),
     })
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data, "*********");
-        // check the user credential from db
-        if (data.login == "successful!") {
-        }
-      })
+      .then((data) => console.log(data))
       .then((error) => console.log(error));
   });
 };
