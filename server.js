@@ -1,31 +1,30 @@
 import express from "express";
 import bodyParser from "body-parser";
-import userRoutes from "./routes/users.routes.js";
-import homeRoutes from "./routes/home.routes.js";
+import * as dotenv from "dotenv";
+import * as userRoutes from "./routes/users.routes.js";
+dotenv.config();
 
 const app = express();
-const PORT = 3000;
-
-app.listen(`${PORT}`, () => {
-  console.log(`app is listening on ${PORT}`);
-});
-
-// __dirname not supported in ES modules
 
 // serve static files using express.static() middlewhere
 app.use(express.static("/Users/michaelshin/Applications/wordle/public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// middleware to access api endpoints for users
-app.use("/users", userRoutes);
+app.use("/", userRoutes.router);
 
-app.use("/home", homeRoutes);
+app.use((req, res, next) => {
+  res.status(400).json({
+    message: "No such route exists :(",
+  });
+});
 
-// app.use("/users", userRoutes.getOneUserRoute);
-// app.use("/users", userRoutes.createUserRoute);
-// app.use("/users", userRoutes.loginUserRoute);
+app.use((err, req, res, next) => {
+  res.status(err.status || 500).json({
+    message: "Error Message",
+  });
+});
 
-app.get("/home", (req, res) => {
-  res.json({ status: "this is the home page" });
+app.listen(`${process.env.PORT}`, () => {
+  console.log(`app is listening on ${process.env.PORT}`);
 });

@@ -1,11 +1,11 @@
-const isWorking = () => {
-  return true;
-};
 const container = document.getElementById("root");
 container.className =
-  "container-fluid min-vh-100 d-flex align-items-center justify-content-center";
+  "container-fluid min-vh-100 d-flex align-items-center justify-content-center ";
 
-const login = () => {
+export const login = () => {
+  const loginElement = document.createElement("div");
+  container.appendChild(loginElement);
+  loginElement.id = "login";
   const login = document.getElementById("login");
 
   // create the header
@@ -61,18 +61,6 @@ const login = () => {
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
-
-    fetch("/users/login/user", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ user: userName.value, pw: password.value }),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .then((error) => console.log(error));
+    console.log("post request by user to gain access to the home page");
   });
 };
-
-export { login, isWorking };
