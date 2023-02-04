@@ -1,16 +1,5 @@
-import { Sequelize } from "sequelize";
-import { Op, Model, DataTypes } from "sequelize";
-
-const sequelize = new Sequelize(
-  "postgres://michaelshin:1234@localhost:5432/wordle"
-);
-
-try {
-  await sequelize.authenticate();
-  console.log("Connection has been established successfully.");
-} catch (error) {
-  console.error("Unable to connect to the database:", error);
-}
+import { DataTypes } from "sequelize";
+import { sequelize } from "./index.js";
 
 export const User = sequelize.define(
   "user",
@@ -37,7 +26,6 @@ export const User = sequelize.define(
     // If don't want updatedAt
     updatedAt: false,
     // your other configuration here
+    logging: false,
   }
 );
-
-console.log(User === sequelize.models.user);
