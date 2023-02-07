@@ -44,12 +44,12 @@ export const login = () => {
   // Create the submit button element
   let submitButton = document.createElement("input");
   submitButton.type = "submit";
-  submitButton.value = "Login";
+  submitButton.value = "login";
   submitButton.className = "btn btn-primary btn-lg";
 
   // a href link to register account
   let registerLink = document.createElement("a");
-  registerLink.href = "#";
+  registerLink.href = "/signup";
   registerLink.innerHTML = "Register here";
 
   // Append the submit button to the form
@@ -59,8 +59,23 @@ export const login = () => {
   // Add the form to the document
   login.appendChild(form);
 
-  form.addEventListener("submit", (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
-    console.log("post request by user to gain access to the home page");
-  });
+    const username = form.elements.username.value
+    const password= form.elements.password.value
+    const data = {username, password}
+    console.log(data)
+    try {
+      // fetch here
+      await fetch('/login', {method : 'POST', headers: {
+      'Content-Type': 'application/json',
+      },body: JSON.stringify(data)}) 
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  form.addEventListener("submit", onSubmit)
+
 };
+
